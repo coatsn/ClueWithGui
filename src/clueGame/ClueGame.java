@@ -1,5 +1,8 @@
 package clueGame;
 
+import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
@@ -8,6 +11,10 @@ import java.util.Random;
 import java.util.Scanner;
 
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
 
 public class ClueGame extends JFrame {
@@ -15,12 +22,13 @@ public class ClueGame extends JFrame {
 	ArrayList<Card> dealtCards = new ArrayList<Card>();
 	ArrayList<Player> players = new ArrayList<Player>();
 	Board board;
+	NotesGui notesGui;
 	ClueControl controls;
 	HumanPlayer player;
 	int turn;
 	Solution solution;
 	int index = 0;
-
+	private int diceRoll;
 
 	ClueGame() throws FileNotFoundException, BadConfigFormatException{
 		loadPlayers();
@@ -30,6 +38,21 @@ public class ClueGame extends JFrame {
 		controls = new ClueControl(this);
 		board = new Board("ConfigLayout.csv", "ConfigRooms.txt", players);
 		
+		notesGui = new NotesGui(getCards());
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setTitle("Clue");
+		setSize(600,600);
+		add(board, BorderLayout.CENTER);
+		add(controls, BorderLayout.SOUTH);
+		JMenuBar bar = new JMenuBar();
+		bar.add(createMenu());
+		add(bar, BorderLayout.NORTH);
+		Player human = players.get(0);
+		
+		
+		HumanHandPanel hPanel = new HumanHandPanel(human.getCards());
+		add(hPanel, BorderLayout.EAST);
+		roll();
 		//player = (HumanPlayer)players.get(0);
 	}
 
@@ -59,21 +82,20 @@ public class ClueGame extends JFrame {
 		index++;
 	}
 	
-	public int roll() {
+	public void roll() {
 		Random rand = new Random();
-		int dice = rand.nextInt(6) + 1;
-		
-		return dice;
+		diceRoll = rand.nextInt(6) + 1;
 	}
 
 	public void takeTurn() {
-		controls.setRoll(roll());
+		roll();
+		controls.setRoll(diceRoll);
 		boolean playerTakenTurn = false;
 		if(isCurrentHuman()) {
 			System.out.println("human");
 			HumanPlayer human = (HumanPlayer) getCurrentPlayer();
 			System.out.println(human.getCol());
-			board.startTargets(board.calcIndex(human.getRow(), human.getCol()), controls.getRoll());
+			board.startTargets(board.calcIndex(human.getRow(), human.getCol()), diceRoll);
 			System.out.println("you actually rolled a: " + controls.getRoll());
 			human.takeTurn(board.getTargets());
 			playerTakenTurn = true;
@@ -81,7 +103,7 @@ public class ClueGame extends JFrame {
 		} else {
 			System.out.println("computer");
 			ComputerPlayer comp = (ComputerPlayer) getCurrentPlayer();
-			board.startTargets(board.calcIndex(comp.getRow(), comp.getCol()), controls.getRoll());
+			board.startTargets(board.calcIndex(comp.getRow(), comp.getCol()), diceRoll);
 			System.out.println("you actually rolled a: " + controls.getRoll());
 			comp.takeTurn(board.getTargets());
 			playerTakenTurn = true;
@@ -221,5 +243,50 @@ public class ClueGame extends JFrame {
 	
 	public Board getBoard(){
 		return board;
+	}
+	
+	public int getDiceRoll() {
+		return diceRoll;
+	}
+	//*************************************** GUI STUFF*************************************************
+	
+	private JMenu createMenu() {
+		JMenu menu = new JMenu("File");
+		menu.add(createFileExitItem());
+		menu.add(createNotesItem());
+		
+		return menu;
+	}
+	
+
+	
+	private JMenuItem createNotesItem() {
+		JMenuItem item = new JMenuItem("Detective Notes");
+		
+		class MenuItemListener implements ActionListener {
+			public void actionPerformed(ActionEvent e) {
+				notesGui.setVisible(true);
+			}
+		}
+		item.addActionListener(new MenuItemListener());
+		return item;
+	}
+	
+	private JMenuItem createFileExitItem() {
+		JMenuItem item = new JMenuItem("Exit");
+		class MenuItemListener implements ActionListener {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		}
+		item.addActionListener(new MenuItemListener());
+		return item;
+	}
+	
+	public static void main(String[] args) throws FileNotFoundException, BadConfigFormatException {
+		ClueGame game = new ClueGame();
+		JOptionPane p = new JOptionPane();
+		p.showMessageDialog(game,"You are Colonel Mustard, press next player to begin.", "Welcome", JOptionPane.INFORMATION_MESSAGE);
+		game.setVisible(true);
 	}
 }

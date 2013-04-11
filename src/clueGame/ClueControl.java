@@ -29,22 +29,6 @@ public class ClueControl extends JPanel {
 	public ClueControl(ClueGame clueGame) {
 		this.clueGame = clueGame;
 		board = clueGame.board;
-	//	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	//	setTitle("Clue");
-
-/*		turn = new TurnPanel(clueGame);
-		add(turn);
-		n = new NextButton(clueGame, board);
-		add(n);
-		b = new AccusationButton();
-		add(b);
-		r = new RollPanel();
-		add(r);
-		g = new GuessPanel();
-		add(g);
-		grp = new GuessResultPanel();
-		add(grp);*/
-		
 		
 		createPanels();
 	}
@@ -110,59 +94,18 @@ public class ClueControl extends JPanel {
 			
 			clueGame.takeTurn();
 			System.out.println("you rolled a: " +  roll);
+			createPanels();
 			
 		}
+		
 	}
 	
-/*	public TurnPanel getTurn() {
-		return turn;
-	}
-
-
-
-	public NextButton getN() {
-		return n;
-	}
-
-
-
-	public AccusationButton getB() {
-		return b;
-	}
-
-
-
-	public GuessPanel getG() {
-		return g;
-	}
-
-
-
-	public GuessResultPanel getGrp() {
-		return grp;
-	}
-
-
-
-	public RollPanel getR() {
-		return r;
-	}*/
-
-	public Board getBoard() {
-		return board;
+	public void setRoll(int r) {
+		roll = r;
 	}
 	
-
 	public int getRoll() {
 		return roll;
 	}
-
-	public void setRoll(int roll) {
-		this.roll = roll;
-	}
-
-
-	
-	
 
 }

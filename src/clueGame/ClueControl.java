@@ -95,7 +95,7 @@ public class ClueControl extends JPanel {
 			
 			clueGame.takeTurn();
 	//		System.out.println("you rolled a: " +  roll);
-			createPanels();
+	//		createPanels();
 			
 		}
 		

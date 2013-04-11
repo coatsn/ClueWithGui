@@ -1,0 +1,18 @@
+commit d9c0aba0835bfbe54649607f32740d8424209652
+Merge: b0e1404 08419f9
+Author: coatsn <ncoats@mines.edu>
+Date:   Mon Mar 18 21:53:41 2013 -0600
+
+    Merge branch 'master' of https://github.com/coatsn/PartnerCode
+
+commit b0e140497ed38a1febde0d41b66863d3100d4086
+Author: coatsn <ncoats@mines.edu>
+Date:   Mon Mar 18 21:52:02 2013 -0600
+
+    refactored code
+
+commit 08419f99fe59583ac104794ed0a890f4575487cd
+Author: coatsn <ncoats@mines.edu>
+Date:   Thu Mar 7 12:08:23 2013 -0700
+
+    intial commit

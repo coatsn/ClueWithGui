@@ -1,0 +1,6 @@
+0 4 ORANGE Col. Mustard
+10 0 RED Miss. Scarlett
+0 11 PINK Prof. Plum
+24 7 GREEN Mr. Green
+24 24 BLUE Mrs. Peacock
+13 24 WHITE Mrs. White

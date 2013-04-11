@@ -1,0 +1,22 @@
+weapon candlestick
+weapon wrench
+weapon rope
+weapon revolver
+weapon knife
+weapon pipe
+person Col. Mustard
+person Prof. Plum
+person Miss. Scarlett
+person Mr. Green
+person Mrs. Peacock
+person Mrs. White
+room Kitchen
+room Ballroom
+room Conservatory
+room Billiard room
+room Library
+room Lounge
+room Hall
+room Study
+room Dining room
+room Walkway

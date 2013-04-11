@@ -1,0 +1,6 @@
+f8ff7a639e0f03982a0543754e17ae9798a60bf4 final commit, added detective notes. NOTE: again, we pair programmed
+4e6d4d7a79b1bf267e2b7ba3b252553c6b49685d added menu
+c1ee29b78afd4f814f03a0aaf25c58f3bf2166da added correct player color
+efa4d9701cf491a6bc105ed3e023e36419e652dd Players are now shown correctly, without correct colors. NOTE: we are pair programming
+fb9c7a52c9710b95971cea4950a39cadd21cb0c2 Board now visible and door diections working properly
+15ae35f805d4630c5f620c54ed8f6074efec3c97 initial commit

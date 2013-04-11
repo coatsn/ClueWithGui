@@ -52,7 +52,6 @@ public class ClueGame extends JFrame {
 		
 		HumanHandPanel hPanel = new HumanHandPanel(human.getCards());
 		add(hPanel, BorderLayout.EAST);
-		roll();
 		//player = (HumanPlayer)players.get(0);
 	}
 
@@ -90,28 +89,27 @@ public class ClueGame extends JFrame {
 	public void takeTurn() {
 		roll();
 		controls.setRoll(diceRoll);
+	//	controls.updateFields();
 		boolean playerTakenTurn = false;
 		if(isCurrentHuman()) {
-			System.out.println("human");
+	//		System.out.println("human");
 			HumanPlayer human = (HumanPlayer) getCurrentPlayer();
-			System.out.println(human.getCol());
 			board.startTargets(board.calcIndex(human.getRow(), human.getCol()), diceRoll);
-			System.out.println("you actually rolled a: " + controls.getRoll());
+	//		System.out.println("you actually rolled a: " + diceRoll);
 			human.takeTurn(board.getTargets());
 			playerTakenTurn = true;
 
 		} else {
-			System.out.println("computer");
+	//		System.out.println("computer");
 			ComputerPlayer comp = (ComputerPlayer) getCurrentPlayer();
 			board.startTargets(board.calcIndex(comp.getRow(), comp.getCol()), diceRoll);
-			System.out.println("you actually rolled a: " + controls.getRoll());
+	//		System.out.println("you actually rolled a: " + diceRoll);
 			comp.takeTurn(board.getTargets());
 			playerTakenTurn = true;
 		}
 	//	System.out.println(getCurrentPlayer().getName());
 		if(playerTakenTurn)
 			nextPlayer();
-
 	}
 
 	public boolean checkAccusation(Solution solution){

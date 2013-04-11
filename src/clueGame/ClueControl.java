@@ -19,6 +19,7 @@ public class ClueControl extends JPanel {
 	private String currentPlayer;
 	private Board board;
 	private int roll;
+	private JTextField rolled;
 /*	private TurnPanel turn;
 	private NextButton n;
 	private AccusationButton b;
@@ -29,7 +30,7 @@ public class ClueControl extends JPanel {
 	public ClueControl(ClueGame clueGame) {
 		this.clueGame = clueGame;
 		board = clueGame.board;
-		
+		roll = clueGame.getDiceRoll();
 		createPanels();
 	}
 	
@@ -62,7 +63,7 @@ public class ClueControl extends JPanel {
 
 		r.setLayout(new GridLayout(1,2));
 		JLabel rollLabel = new JLabel("Roll");
-		JTextField rolled = new JTextField(roll + "");
+		rolled = new JTextField();
 		r.add(rollLabel);
 		r.add(rolled);
 		r.setBorder((Border) new TitledBorder (new EtchedBorder(), "Die"));
@@ -93,7 +94,7 @@ public class ClueControl extends JPanel {
 		{
 			
 			clueGame.takeTurn();
-			System.out.println("you rolled a: " +  roll);
+	//		System.out.println("you rolled a: " +  roll);
 			createPanels();
 			
 		}
@@ -102,10 +103,16 @@ public class ClueControl extends JPanel {
 	
 	public void setRoll(int r) {
 		roll = r;
+		updateFields();
 	}
 	
 	public int getRoll() {
 		return roll;
+	}
+	
+	public void updateFields() {
+		rolled.setText(roll + "");
+		System.out.println("rolled contains: " + rolled.getText());
 	}
 
 }
